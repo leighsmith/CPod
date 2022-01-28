@@ -14,7 +14,7 @@ if (!cbus.hasOwnProperty("server")) { cbus.server = {} }
       ) {
         callback(r.cbus_popular_podcasts_cache)
       } else {
-	popularPodcastsURL = `https://rss.applemarketingtools.com/api/v2/${region}/podcasts/top/10/podcast-episodes.json`;
+        const popularPodcastsURL = `https://rss.applemarketingtools.com/api/v2/${region}/podcasts/top/10/podcasts.json`;
         xhr(popularPodcastsURL, function(err, status, r) {
           if (statusCodeNotOK(status.statusCode)) {
             callback(false);

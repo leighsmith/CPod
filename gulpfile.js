@@ -1,27 +1,27 @@
-const gulp = require("gulp");
+const { src, dest, series } = require("gulp");
 
 // sass
 
-gulp.task("sass", function() {
+function sass() {
   const postcss = require("gulp-postcss");
   const autoprefixer = require("autoprefixer");
-  const sass = require("gulp-sass");
+  const sass = require("gulp-sass")(require('sass'));
 
-  return gulp.src("./public/app/style.scss")
+  return src("./public/app/style.scss")
     .pipe(sass().on("error", sass.logError))
     .pipe(postcss([ autoprefixer({ browsers: ["last 8 Chrome versions"] }) ]))
-    .pipe(gulp.dest("./public/app/"));
-});
+    .pipe(dest("./public/app/"));
+}
 
 // jade
 
-gulp.task("pug", function() {
+function pug() {
   const pug = require("gulp-pug");
 
-  return gulp.src("./public/app/index.pug")
+  return src("./public/app/index.pug")
     .pipe(pug())
-    .pipe(gulp.dest("./public/app/"));
-});
+    .pipe(dest("./public/app/"));
+}
 
 // js
 
@@ -42,21 +42,21 @@ const jsSrc = [
   "main.js"
 ].map(filename => "./public/app/js/" + filename);
 
-gulp.task("js", function() {
+function js() {
   const concat = require("gulp-concat");
   const sourcemaps = require("gulp-sourcemaps");
   const rename = require("gulp-rename");
 
-  return gulp.src(jsSrc)
+  return src(jsSrc)
     .pipe(sourcemaps.init())
     .pipe(concat("all.js"))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest("./public/app/js"));
-});
+    .pipe(dest("./public/app/js"));
+}
 
 // contributors
 
-gulp.task("contributors", function(done) {
+function contributors(done) {
   const path = require("path");
   const fs = require("fs");
   const request = require("request");
@@ -109,11 +109,11 @@ gulp.task("contributors", function(done) {
   }
 
   doTheThing();
-});
+}
 
 // i18n key copier
 
-gulp.task("i18n", function() {
+function i18n() {
   const fs = require("fs");
   const path = require("path");
 
@@ -189,11 +189,11 @@ gulp.task("i18n", function() {
       fs.writeFileSync(filepath, output);
     }
   });
-});
+}
 
 // licenses
 
-gulp.task("licenses", function() {
+function licenses() {
   const fs = require("fs");
   const path = require("path");
 
@@ -285,19 +285,20 @@ limitations under the License.
   </html>`.replace(/\r\n/g, "\n");
 
   fs.writeFileSync(path.join(__dirname, "public", "licenses.html"), finalHTML);
-});
+}
 
 // watch
 
-gulp.task("watch", function() {
+function watch() {
   gulp.watch("./public/app/index.pug", ["pug"]);
   gulp.watch("./public/app/style.scss", ["sass"]);
   gulp.watch("./public/app/js/*.js", ["js"]);
   gulp.watch("./locales/en.json", ["i18n"]);
   gulp.watch("./package.json", ["licenses"]);
-});
+}
 
 // batch tasks
 
-gulp.task("default", ["pug", "sass", "js", "licenses"]);
-gulp.task("both", ["default", "watch"]);
+exports.default = series(pug, sass, js, licenses);
+// in parallel()?
+exports.both = series(exports.default, watch);

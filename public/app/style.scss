@@ -361,10 +361,10 @@ header {
 
         display: none;
 
-        padding-bottom: $bottomSpacing / 2;
+        padding-bottom: calc($bottomSpacing / 2);
         border-bottom: solid 1px;
         border-bottom-color: var(--color-divider);
-        margin-bottom: $bottomSpacing / 2;
+        margin-bottom: calc($bottomSpacing / 2);
 
         &.visible {
           display: block;
@@ -532,8 +532,8 @@ header {
   }
 
   .settings_section {
-    margin: (58px / 2) 0;
-    padding: (58px / 3);
+    margin: calc(58px / 2) 0;
+    padding: calc(58px / 3);
 
     background-color: var(--color-card-bg);
 
@@ -1326,8 +1326,8 @@ header {
       justify-content: space-around;
       position: relative;
       align-items: left;
-      padding: $padding*3/4;
-      padding-bottom: $padding/4;
+      padding: calc($padding * 3 / 4);
+      padding-bottom: calc($padding / 4);
 
       color: var(--md-black);
       background-color: var(--color-card-bg);
@@ -1420,7 +1420,7 @@ header {
         font-family: $font-main-condensed;
 
         padding: 0.5em 0.7em;
-        margin: $padding/8 0;
+        margin: calc($padding / 8) 0;
         height: 40px;
         cursor: pointer;
         border-radius: 4px;
@@ -1441,8 +1441,8 @@ header {
           font-size: 0.7em;
           color: inherit;
           margin: 0;
-          margin-left: $padding/4;
-          padding: $padding/4;
+          margin-left: calc($padding / 4);
+          padding: calc($padding / 4);
 
           opacity: 0.8;
           transition-property: opacity;
@@ -1512,20 +1512,20 @@ header {
 
     .podcast-detail_episodes {
       background-color: var(--color-bg);
-      padding-top: $padding/4;
+      padding-top: calc($padding / 4);
 
       .podcast-detail_episode {
         .podcast-detail_episode_container {
-          padding: $padding/4 $padding/2;
-          padding-right: $padding/4;
+          padding: calc($padding / 4) calc($padding / 2);
+          padding-right: calc($padding / 4);
 
-          margin: $padding/4;
+          margin: calc($padding / 4);
 
           background-color: var(--color-card-bg);
           border-radius: 4px;
 
           &:first-child {
-            padding-top: $padding/2;
+            padding-top: calc($padding / 2);
             margin-top: 0;
           }
 
@@ -1554,7 +1554,7 @@ header {
             margin-left: -11.4px; // related to the padding in the play icon
 
             button {
-              margin-right: $padding/8;
+              margin-right: calc($padding / 8);
             }
           }
         }
@@ -1651,7 +1651,7 @@ body.podcast-detail-visible {
   .progressbar {
     $padding: 12px;
     padding: $padding;
-    padding-top: $padding * 2/3;
+    padding-top: calc($padding * 2 / 3);
     background-color: var(--color-card-bg);
     @include material-shadow(-2);
 
@@ -1669,9 +1669,9 @@ body.podcast-detail-visible {
       width: 100%;
       height: $padding;
       background-color: var(--color-card-bg-tertiary);
-      border-radius: $padding / 2;
+      border-radius: calc($padding / 2);
       overflow: hidden;
-      margin-right: $padding * 2/3;
+      margin-right: calc($padding * 2 / 3);
 
       .progressbar_bar {
         width: 0;
@@ -1694,8 +1694,8 @@ body.podcast-detail-visible {
     .progressbar_lower {
       display: flex;
       align-items: center;
-      padding-top: $padding * 2/3;
-      height: #{$padding * (1 + 2/3)};
+      padding-top: calc($padding * 2 / 3);
+      height: #{$padding * calc(1 + 2 / 3)};
     }
 
     .progressbar_actions {

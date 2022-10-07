@@ -48,6 +48,12 @@ const xhr = function(options, callback) {
   if (timeout) {
     req.timeout = timeout;
   }
+  req.ontimeout = function(e) {
+    callback(e, {
+      statusCode: this.status,
+      requestUrl: url
+    }, null);
+  }
   if (responseType) {
     req.responseType = responseType;
   }

@@ -11,7 +11,8 @@ cbus.const.podcastSort = function(a, b) {
   return 0;
 };
 
-cbus.const.REQUEST_TIMEOUT = 15 * 1000;
+// Set longer nowadays, as you can get some slow servers.
+cbus.const.REQUEST_TIMEOUT = 30 * 1000;
 
 cbus.const.USERDATA_PATH = remote.app.getPath("userData");
 cbus.const.PODCAST_IMAGES_DIR = path.join(cbus.const.USERDATA_PATH, "podcast_images");
